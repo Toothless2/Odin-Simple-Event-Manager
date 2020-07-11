@@ -13,12 +13,14 @@
 <p>
   <strong>You are going to</strong>
   <ul>
-    <% @user.events.each do |e| %>
-      <li><%= link_to e.title, event_path(e) %> @ <%= e.when %> and <%= e.users.count %> <%= 'person'.pluralize(e.users.count) %> <%= e.users.count == 1 ? 'is' : 'are' %> going
+    <% if @user.events.count == 0%>
+      <li>Nothing :(</li>
+    <%else%>
+      <% @user.events.each do |e| %>
+        <li><%= link_to e.title, event_path(e) %> @ <%= e.when %> and <%= e.users.count %> <%= 'person'.pluralize(e.users.count) %> <%= e.users.count == 1 ? 'is' : 'are' %> going
+      <%end%>
     <%end%>
   </ul>
 </p>
 
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

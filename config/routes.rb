@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   get '/events/goto/:eventid', :to => 'events#goToEvent', :as => 'goto'
 
   resources :events
-  resources :users
+  resources :users, only: [:index, :show, :new]
 
   root 'users#index'
 
