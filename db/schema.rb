@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_07_11_172552) do
+ActiveRecord::Schema.define(version: 2020_07_11_214148) do
+
+  create_table "events", force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.datetime "when"
+    t.integer "owner_id"
+    t.index ["owner_id"], name: "index_events_on_owner_id"
+    t.index ["title"], name: "index_events_on_title"
+    t.index ["when"], name: "index_events_on_when"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email"

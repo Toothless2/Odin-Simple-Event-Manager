@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :events
   #need to add before resources :users to work properly
   post '/users/login', :to => 'users#newlogin', :as => 'user_login'
   get '/users/logout', :to => 'users#logout', :as => 'logout'

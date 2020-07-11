@@ -9,6 +9,11 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
+
+    if loggedin?
+      redirect_to events_path
+    end
+
     @users = User.all
   end
 

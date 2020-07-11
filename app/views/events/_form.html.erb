@@ -1,0 +1,15 @@
+
+<%= simple_form_for(@event) do |f| %>
+  <%= f.error_notification %>
+  <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+
+  <div class="form-inputs">
+    <%= f.input :title, autoselect: true, required: true %>
+    <%= f.input :description, required: true %>
+    <%= f.input :when, as: :datetime, required: true, input_html: { value: DateTime.now.to_s } %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>
