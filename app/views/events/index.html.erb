@@ -21,8 +21,12 @@
         <td><%= event.when %></td>
         <td><%= event.owner.name %></td>
         <td><%= link_to 'Show', event %></td>
-        <td><%= link_to 'Edit', edit_event_path(event) %></td>
-        <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% if event.owner == @loggedInUser %>
+          <td><%= link_to 'Edit', edit_event_path(event) %></td>
+          <td><%= link_to 'Destroy', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <%else%>
+          <td><%= link_to 'Go To Event!', goto_path(event) %></td>
+        <%end%>
       </tr>
     <% end %>
   </tbody>

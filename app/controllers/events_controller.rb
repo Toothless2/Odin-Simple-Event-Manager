@@ -29,7 +29,6 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    p event_params[:event]
     @event = @loggedInUser.created_events.build(event_params)
 
     respond_to do |format|
@@ -67,6 +66,19 @@ class EventsController < ApplicationController
     end
   end
 
+  # GET /events/goto/:id
+  def goToEvent
+    if join_event_params.owner != @loggedInUser # just to validate user input even more
+      if UsersGoingToEvent.where(user: @loggedInUser, event: join_event_params).exists?
+        UsersGoingToEvent.where(user: @loggedInUser, event: join_event_params).first.destroy
+      else
+        UsersGoingToEvent.new(user: @loggedInUser, event: join_event_params).save
+      end
+    end
+
+    redirect_to users_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_event
@@ -76,6 +88,10 @@ class EventsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def event_params
       params.require(:event).permit(:title, :description, :when)
+    end
+
+    def join_event_params
+      Event.find(params.require(:eventid))
     end
 
     def checkLogin

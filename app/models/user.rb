@@ -1,6 +1,9 @@
 class User < ApplicationRecord
     validates :email, :name, presence: true
     validates :email, uniqueness: true
+
+    has_many :users_going_to_events, dependent: :destroy
+    has_many :events, through: :users_going_to_events
     
     has_many :created_events, foreign_key: 'owner_id', class_name: 'Event', dependent: :destroy
 
