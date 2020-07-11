@@ -20,5 +20,14 @@
   <%= @event.owner.name %>
 </p>
 
+<p>
+  <strong>Going:</strong>
+  <ul>
+    <% @event.users.each do |u| %>
+      <li><%= u.name %></li>
+    <%end%>
+  </ul>
+</p>
+
 <%= link_to 'Edit', edit_event_path(@event) %> |
 <%= link_to 'Back', events_path %>

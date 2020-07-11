@@ -27,6 +27,7 @@
         <%else%>
           <td><%= link_to 'Go To Event!', goto_path(event) %></td>
         <%end%>
+        <td><%= "Going: " + (event.users.count == 0 ?  'No one is comming :( ' : event.users.count.to_s) %>
       </tr>
     <% end %>
   </tbody>
