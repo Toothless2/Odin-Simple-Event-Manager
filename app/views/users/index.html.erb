@@ -1,6 +1,13 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Users</h1>
+<%= render partial: 'login' %>
+  
+<% if loggedin? %>
+  <p>Hey <%= getLoggedInUser.name %></p>
+  <%= link_to 'Logout', logout_path %>
+<%end%>
+
+<hr />
 
 <table>
   <thead>
@@ -23,7 +30,3 @@
     <% end %>
   </tbody>
 </table>
-
-<br>
-
-<%= link_to 'New User', new_user_path %>
