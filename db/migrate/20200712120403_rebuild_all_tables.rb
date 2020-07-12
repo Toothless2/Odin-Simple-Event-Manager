@@ -12,7 +12,7 @@ class RebuildAllTables < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :description
       t.datetime :when
-      t.references :users, :owner, foreign_key: true
+      t.references :owner, foreign_key: true
 
       t.timestamps
     end
