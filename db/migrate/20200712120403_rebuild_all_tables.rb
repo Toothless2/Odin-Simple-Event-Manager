@@ -12,17 +12,16 @@ class RebuildAllTables < ActiveRecord::Migration[5.2]
       t.string :title
       t.string :description
       t.datetime :when
-      t.references :users, foreign_key: true
-      
+      t.references :users, :owner, foreign_key: true
+
       t.timestamps
     end
 
-    rename_column :events, :users, :owner
+    remove_column :events, :users
 
     add_index :events, :title
     add_index :events, :when
     add_index :events, :owner
-
 
     create_table :users_going_to_events do |t|
       t.references :user, foreign_key: true
