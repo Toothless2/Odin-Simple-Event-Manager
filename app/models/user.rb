@@ -14,4 +14,12 @@ class User < ApplicationRecord
     def logout(session)
         session.delete(:user_id)
     end
+
+    def previousEvents
+        self.events.all.filter { |event| event.when.to_datetime <= DateTime.now}
+    end
+
+    def currentEvents
+        self.events.all.filter { |event| event.when.to_datetime >= DateTime.now}
+    end
 end

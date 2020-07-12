@@ -11,12 +11,25 @@
 </p>
 
 <p>
-  <strong>You are going to</strong>
+  <strong>You are going to:</strong>
   <ul>
-    <% if @user.events.count == 0%>
+    <% if @user.currentEvents.count == 0%>
       <li>Nothing :(</li>
     <%else%>
-      <% @user.events.each do |e| %>
+      <% @user.currentEvents.each do |e| %>
+        <li><%= link_to e.title, event_path(e) %> @ <%= e.when %> and <%= e.users.count %> <%= 'person'.pluralize(e.users.count) %> <%= e.users.count == 1 ? 'is' : 'are' %> going
+      <%end%>
+    <%end%>
+  </ul>
+</p>
+
+<p>
+  <strong>You have been to:</strong>
+  <ul>
+    <% if @user.previousEvents.count == 0%>
+      <li>Nothing :(</li>
+    <%else%>
+      <% @user.previousEvents.each do |e| %>
         <li><%= link_to e.title, event_path(e) %> @ <%= e.when %> and <%= e.users.count %> <%= 'person'.pluralize(e.users.count) %> <%= e.users.count == 1 ? 'is' : 'are' %> going
       <%end%>
     <%end%>
